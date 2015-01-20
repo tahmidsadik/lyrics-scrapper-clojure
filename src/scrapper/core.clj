@@ -9,11 +9,13 @@
   (html/html-resource (URL. url)))
 
 (def html-doc (fetch-url base-url))
+(defn shine []
+  (+ 2 3))
 
 (defn get-lyric []
   (map html/text (html/select html-doc [:div.content-post])))
 (def lyric (first (get-lyric)))
-(str/split lyric #"\n")
+(str/replace (str/trim-newline (str/trim lyric)) #"\…|\n|\." "")
 
 (defn -main
   "I don't do a whole lot ... yet."
